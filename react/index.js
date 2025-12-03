@@ -1,7 +1,5 @@
-// const rootEle = document.getElementById("root");
-// const headingEle = document.createElement('h1');
-// headingEle.innerHTML = "Hello World from React!";
-// rootEle.appendChild(headingEle);
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 
 const container = React.createElement('div', { id: 'container' }, [
     React.createElement('div', { id: 'inner-container-1', key: 'container-1' }, [
