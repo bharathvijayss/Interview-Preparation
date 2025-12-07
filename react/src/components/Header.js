@@ -1,15 +1,15 @@
+import { Link, NavLink } from "react-router";
 import { LOGO_URL } from "../utils/constants";
 
 const Header = () => {
     return (
         <header className="header-container">
             <img src={LOGO_URL} alt="logo image in header" className="logo-img" />
-            <input type='search' placeholder="Search for restaurants and food" className="search-input" />
             <ul className="nav-links">
-                <li>Home</li>
-                <li>About Us</li>
-                <li>Contact Us</li>
-                <li>Cart</li>
+                <li><NavLink to='/' className={({ isActive }) => isActive ? 'activatedLink' : ''}>Home</NavLink></li>
+                <li><NavLink to='/about-us' className={({ isActive }) => isActive ? 'activatedLink' : ''}>About Us</NavLink></li>
+                <li><NavLink to='/contact-us' className={({ isActive }) => isActive ? 'activatedLink' : ''}>Contact Us</NavLink></li>
+                <li><NavLink to='/cart' className={({ isActive }) => isActive ? 'activatedLink' : ''}>Cart</NavLink></li>
             </ul>
         </header>
     );
