@@ -22,9 +22,6 @@ const RestaurantDetails = () => {
             const jsonData = await apiRes.json();
             setRestaurantInfo(jsonData.data.cards[2].card.card.info);
             setMenuInfo(jsonData.data.cards[4].groupedCard.cardGroupMap.REGULAR.cards[1].card.card.itemCards);
-            console.log(jsonData.data.cards[2].card.card.info);
-            console.log(jsonData.data.cards[4].groupedCard.cardGroupMap.REGULAR.cards[1].card.card.itemCards);
-
         } catch (err) {
             console.log("Error: ", err);
         }
@@ -45,8 +42,8 @@ const RestaurantDetails = () => {
             />
             {
                 menuInfo.map(menu => {
-                    const { name, price, defaultPrice } = menu?.card?.info;
-                    return <span>{name} - {"Rs." + (price ?? defaultPrice) / 100}</span>
+                    const { name, price, defaultPrice, id } = menu?.card?.info;
+                    return <span key={id}>{name} - {"Rs." + (price ?? defaultPrice) / 100}</span>
                 })
             }
         </>

@@ -4,7 +4,7 @@ import { createBrowserRouter, Outlet, RouterProvider } from 'react-router';
 import Header from './components/Header';
 import Body from './components/Body';
 import RouteError from './components/RouteError';
-import AboutUs from './components/AboutUs';
+import AboutUsClass from './components/AboutUsClass';
 import ContactUs from './components/ContactUs';
 import Cart from './components/Cart';
 import RestaurantDetails from './components/RestaurantDetails';
@@ -30,7 +30,7 @@ const appRoutes = createBrowserRouter([
             },
             {
                 path: 'about-us',
-                element: <AboutUs />
+                element: <AboutUsClass name='Foody' />
             },
             {
                 path: 'contact-us',
