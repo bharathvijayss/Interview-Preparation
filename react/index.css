@@ -58,6 +58,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: stretch;
   gap: 2rem;
   padding: 1rem 0.25rem;
   height: 100%;
@@ -105,7 +106,7 @@ body {
   gap: 0.5rem;
   font-size: 1.25rem;
   box-shadow: 0px 1px 4px 1px salmon;
-  height: max-content;
+  justify-content: space-between;
 
   img {
     height: 250px;
