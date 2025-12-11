@@ -11,7 +11,7 @@ import Shimmer from './components/Shimmer';
 
 const AppComponent = () => {
     return (
-        <div className="container">
+        <div className="flex flex-col gap-4 h-screen w-screen">
             <Header />
             <Outlet />
         </div>

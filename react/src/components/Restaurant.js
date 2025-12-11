@@ -15,11 +15,12 @@ const Restaurant = ({ details }) => {
     }
 
     return (
-        <div className="res-card">
+        <div className="flex p-1 flex-col gap-2 rounded-md justify-between w-64 text-lg shadow-lg shadow-[salmon]">
             <img
                 src={CDN_URL + imgId}
                 alt='Restaurant Image'
                 onError={handleImageError}
+                className="h-64 w-64 object-cover rounded-md"
             />
             <span>{restaurantName}</span>
             <span>Ratings: {avgRating}</span>
@@ -27,7 +28,7 @@ const Restaurant = ({ details }) => {
             <span>Location: {areaName}</span>
             <span>Cost For Two: {costForTwo}</span>
             <span>Cuisines: {cuisines.join(", ")}</span>
-            <button type='button' onClick={openRestaurantDetails} className='check-menu-btn'>Check Menu</button>
+            <button type='button' onClick={openRestaurantDetails} className='px-2 py-1 rounded-lg border cursor-pointer text-lg hover:bg-slate-100'>Check Menu</button>
         </div>
     );
 };
