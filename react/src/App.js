@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useMemo, useState, memo } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router';
 
@@ -8,16 +8,31 @@ import RouteError from './components/RouteError';
 import ContactUs from './components/ContactUs';
 import Cart from './components/Cart';
 import Shimmer from './components/Shimmer';
+import UserContext from './utils/UserContext';
 
 const AppComponent = () => {
+
+    // const [count, setCount] = useState(0);
+    const [userName, setUserName] = useState('Bharath Vijay S S');
+    const [userRole, setUserRole] = useState('Admin');
+    // const contextValue = { name: userName, setUserName, role: userRole, setUserRole };
+    const contextValue = useMemo(() => ({ name: userName, setUserName, role: userRole, setUserRole }), [userName, userRole]);
+
     return (
-        <div className="flex flex-col gap-4 h-screen w-screen">
-            <Header />
-            <Outlet />
-        </div>
+        <UserContext.Provider value={contextValue}>
+            <div className="flex flex-col gap-4 h-screen w-screen">
+                {/* {count} */}
+                {/* <button className='px-4 py-2 border rounded cursor-pointer w-32' onClick={() => setCount(count + 1)}>Update Count</button> */}
+                <UserContext.Provider value={{ name: 'Guest User' }}>
+                    <Header />
+                </UserContext.Provider>
+                <Outlet />
+            </div>
+        </UserContext.Provider>
     );
 };
 
+// const AboutUsClass = memo(lazy(() => import("./components/AboutUsClass")));
 const AboutUsClass = lazy(() => import("./components/AboutUsClass"));
 const RestaurantDetails = lazy(() => import("./components/RestaurantDetails"));
 

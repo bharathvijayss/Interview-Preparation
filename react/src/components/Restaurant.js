@@ -2,10 +2,10 @@ import { useNavigate } from "react-router";
 import { CDN_URL } from "../utils/constants";
 
 const Restaurant = ({ details }) => {
-    const { cloudinaryImageId: imgId, name: restaurantName, avgRating, sla, areaName, id, costForTwo, cuisines } = details.info;
+    const { cloudinaryImageId: imgId, name: restaurantName, avgRating, sla, areaName, id, costForTwo, cuisines, veg } = details.info;
     const navigate = useNavigate();
     const restaurantPlaceHolderImg = new URL('./../assets/placeholder-restaurants.jpg', import.meta.url).href;
-
+    
     const openRestaurantDetails = () => {
         navigate(`restaurant/${id}`);
     }

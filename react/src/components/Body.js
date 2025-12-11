@@ -2,12 +2,14 @@ import Restaurant from './Restaurant';
 import { Fragment, useEffect, useState } from "react";
 import { API_ENDPOINT } from "./../utils/constants";
 import Shimmer from './Shimmer';
+import withPureVegIndicator from '../utils/withPureVegIndicator';
 
 const Body = () => {
 
     const [searchText, setSearchText] = useState('');
     const [restaurants, setRestaurants] = useState([]);
     const [filteredRestaurants, setfilteredRestaurants] = useState([]);
+    const WithPureVegIndicatorRestaurantCard = withPureVegIndicator(Restaurant);
 
     async function fetchRestaurantList() {
         try {
@@ -54,7 +56,13 @@ const Body = () => {
                 <button type='button' className="filter-btn" onClick={filterTopRestaurants}>Top Rated Restaurants</button>
             </div>
             <div className="res-container">
-                {filteredRestaurants?.map(resDetails => <Restaurant details={resDetails} key={resDetails.info.id} />)}
+                {
+                    filteredRestaurants?.map(resDetails =>
+                        resDetails?.info.veg ?
+                            (<WithPureVegIndicatorRestaurantCard details={resDetails} key={resDetails.info.id} />) :
+                            (<Restaurant details={resDetails} key={resDetails.info.id} />)
+                    )
+                }
             </div>
         </Fragment>
     );

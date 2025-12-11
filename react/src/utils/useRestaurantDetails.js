@@ -10,7 +10,7 @@ const useRestaurantDetails = (resId) => {
             const jsonData = await apiRes.json();
             setRestaurantDetails({
                 restaurantInfo: jsonData.data.cards[2].card.card.info,
-                menuInfo: jsonData.data.cards[4].groupedCard.cardGroupMap.REGULAR.cards[1].card.card.itemCards
+                menuCards: jsonData.data.cards[4].groupedCard.cardGroupMap.REGULAR.cards.filter(c => c.card?.card?.["@type"] === ('type.googleapis.com/swiggy.presentation.food.v2.ItemCategory'))
             });
         } catch (err) {
             console.log("Error: ", err);

@@ -2,6 +2,7 @@ import { CDN_URL } from "../utils/constants";
 import { useParams } from "react-router";
 import Shimmer from "./Shimmer";
 import useRestaurantDetails from "../utils/useRestaurantDetails";
+import CategorizedMenus from "./CategorizedMenus";
 
 const RestaurantDetails = () => {
 
@@ -16,17 +17,24 @@ const RestaurantDetails = () => {
 
     return !restaurantDetails ? <Shimmer /> : (
         <>
-            <h1>Restaurant Name: {restaurantDetails.restaurantInfo.name}</h1>
-            <img
-                src={CDN_URL + restaurantDetails.restaurantInfo.cloudinaryImageId}
-                alt='Restaurant Image'
-                onError={handleImageError}
-                style={{ width: '250px', height: '250px' }}
-            />
+            <div className='flex justify-between items-center'>
+                <div className='mx-2 flex flex-col'>
+                    <h4 className='bold'>{restaurantDetails.restaurantInfo.name}</h4>
+                    <h4 >{restaurantDetails.restaurantInfo.locality} - {restaurantDetails.restaurantInfo.areaName}</h4>
+                    <h4 >{restaurantDetails.restaurantInfo.cuisines.join(", ")}</h4>
+                    <h4 >{restaurantDetails.restaurantInfo.costForTwo}</h4>
+                </div>
+                <img
+                    src={CDN_URL + restaurantDetails.restaurantInfo.cloudinaryImageId}
+                    alt='Restaurant Image'
+                    onError={handleImageError}
+                    style={{ width: '100px', height: '100px' }}
+                    className='mx-2'
+                />
+            </div>
             {
-                restaurantDetails.menuInfo.map(menu => {
-                    const { name, price, defaultPrice, id } = menu?.card?.info;
-                    return <span key={id}>{name} - {"Rs." + (price ?? defaultPrice) / 100}</span>
+                restaurantDetails.menuCards.map(menuList => {
+                    return <CategorizedMenus key={menuList.card.card.title} data={menuList.card.card} />
                 })
             }
         </>
