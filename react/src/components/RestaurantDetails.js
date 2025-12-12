@@ -3,11 +3,13 @@ import { useParams } from "react-router";
 import Shimmer from "./Shimmer";
 import useRestaurantDetails from "../utils/useRestaurantDetails";
 import CategorizedMenus from "./CategorizedMenus";
+import { useEffect, useState } from "react";
 
 const RestaurantDetails = () => {
 
     const { id } = useParams();
     const restaurantDetails = useRestaurantDetails(id);
+    const [selectedCategory, setSelectedCategory] = useState(null);
 
     const restaurantPlaceHolderImg = new URL('./../assets/placeholder-restaurants.jpg', import.meta.url).href;
 
@@ -33,8 +35,15 @@ const RestaurantDetails = () => {
                 />
             </div>
             {
-                restaurantDetails.menuCards.map(menuList => {
-                    return <CategorizedMenus key={menuList.card.card.title} data={menuList.card.card} />
+                restaurantDetails.menuCards.map((menuList, index) => {
+                    return <CategorizedMenus
+                        key={menuList.card.card.title}
+                        data={menuList.card.card}
+                        toggleCard={() => {
+                            setSelectedCategory(selectedCategory === index ? null : index)
+                        }}
+                        isExpanded={selectedCategory === index}
+                    />
                 })
             }
         </>

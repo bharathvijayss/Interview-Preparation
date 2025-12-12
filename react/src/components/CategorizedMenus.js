@@ -1,13 +1,13 @@
 import { CDN_URL } from "../utils/constants";
 
-const CategorizedMenus = ({ data }) => {
+const CategorizedMenus = ({ data, toggleCard, isExpanded }) => {
     return (
         <div className='flex flex-col mx-2'>
-            <div className='flex justify-between items-center p-4 bg-gray-200 rounded'>
+            <div className='flex justify-between items-center p-4 bg-gray-200 rounded' onClick={toggleCard}>
                 <div>{data.title}</div>
-                <div>⬇️</div>
+                <div>{isExpanded ? "⬆️" : "⬇️"}</div>
             </div>
-            <div className='flex flex-col mt-2 gap-2'>
+            {isExpanded && <div className='flex flex-col mt-2 gap-2'>
                 {data.itemCards.map((menu) => {
                     return (
                         <div className='flex justify-between items-center border-2 rounded border-gray-200' key={menu.card.info.id}>
@@ -22,7 +22,7 @@ const CategorizedMenus = ({ data }) => {
                         </div>
                     );
                 })}
-            </div>
+            </div>}
         </div>
     );
 }
