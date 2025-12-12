@@ -1,6 +1,7 @@
 import { lazy, Suspense, useMemo, useState, memo } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router';
+import { Provider } from 'react-redux';
 
 import Header from './components/Header';
 import Body from './components/Body';
@@ -9,6 +10,7 @@ import ContactUs from './components/ContactUs';
 import Cart from './components/Cart';
 import Shimmer from './components/Shimmer';
 import UserContext from './utils/UserContext';
+import appStore from './utils/appStore';
 
 const AppComponent = () => {
 
@@ -19,16 +21,18 @@ const AppComponent = () => {
     const contextValue = useMemo(() => ({ name: userName, setUserName, role: userRole, setUserRole }), [userName, userRole]);
 
     return (
-        <UserContext.Provider value={contextValue}>
-            <div className="flex flex-col gap-4 h-screen w-screen">
-                {/* {count} */}
-                {/* <button className='px-4 py-2 border rounded cursor-pointer w-32' onClick={() => setCount(count + 1)}>Update Count</button> */}
-                <UserContext.Provider value={{ name: 'Guest User' }}>
-                    <Header />
-                </UserContext.Provider>
-                <Outlet />
-            </div>
-        </UserContext.Provider>
+        <Provider store={appStore}>
+            <UserContext.Provider value={contextValue}>
+                <div className="flex flex-col gap-4 h-screen w-screen">
+                    {/* {count} */}
+                    {/* <button className='px-4 py-2 border rounded cursor-pointer w-32' onClick={() => setCount(count + 1)}>Update Count</button> */}
+                    <UserContext.Provider value={{ name: 'Guest User' }}>
+                        <Header />
+                    </UserContext.Provider>
+                    <Outlet />
+                </div>
+            </UserContext.Provider>
+        </Provider>
     );
 };
 
