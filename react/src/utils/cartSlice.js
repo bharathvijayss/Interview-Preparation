@@ -7,6 +7,7 @@ const cartSlice = createSlice({
     },
     reducers: {
         addToCart: (state, action) => {
+            // TODO: Need to Handle same Item getting added multiple times
             state.items.push(action.payload);
         },
         removeFromCart: (state, action) => {
